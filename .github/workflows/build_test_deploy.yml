@@ -33,6 +33,22 @@ jobs:
       
     - name: Start Front-End
       run: npm run start &
+
+    - name: Wait for Backend to be Ready
+      run: |
+        for i in {1..10}; do 
+          curl --silent --fail http://localhost:3030 && break
+          echo "Waiting for backend..."
+          sleep 2
+        done
+
+    - name: Wait for Frontend to be Ready
+      run: |
+        for i in {1..10}; do 
+          curl --silent --fail http://localhost:3000 && break
+          echo "Waiting for frontend..."
+          sleep 2
+        done
     
     - name: Execute UI tests
       run: npm run test
