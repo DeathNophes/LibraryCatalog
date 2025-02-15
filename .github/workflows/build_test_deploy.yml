@@ -21,6 +21,9 @@ jobs:
 
     - name: Install NPM modules 
       run: npm install
+    
+    - name: Install Browsers
+      run: npx playwright install
 
     - name: Replace the Back-End config
       run: echo "export const settings = {host:\"https://localhost:3030\"}" > src/config.js
@@ -30,9 +33,6 @@ jobs:
       
     - name: Start Front-End
       run: npm run start &
-    
-    - name: Install Browsers
-      run: npx playwright install
     
     - name: Execute UI tests
       run: npm run test
